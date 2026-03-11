@@ -1,0 +1,32 @@
+# Initialize house-ops-proto1
+
+This plan covers the initialization and implementation of a Vite-based React+TypeScript application with a modern orange-themed UI.
+
+## Proposed Changes
+
+### Setup and Dependencies
+- Initialize project: `npx -y create-vite@latest house-ops-proto1 --template react-ts`
+- Install routing: `npm install react-router-dom`
+- Install icons: `npm install lucide-react`
+
+### Structure
+- **Routing**: Setup `react-router-dom` with routes for Dashboard, Products, Supermarket List, and Daily Tasks.
+- **Layout**: Create a `Sidebar` component and a main `Layout` wrapper.
+- **Pages**:
+  - `Dashboard`: Overview page providing links/summaries of other modules.
+  - `Products`: Mock form/list for products ("Cadastro de produtos").
+  - `Supermarket`: Mock form/list for supermarket items ("Lista de supermercado").
+  - `Tasks`: Mock todo-style list ("Tarefas diárias").
+- **Services**: `api.ts` with mock async functions using standard `setTimeout` to simulate latency from external APIs.
+- **Styling**: Vanilla CSS in `index.css` defining custom properties for an orange color palette, modern typography, glassmorphism, and responsive layouts.
+
+## Verification Plan
+
+### Automated Tests
+- Build verification: `npm run build`
+
+### Manual Verification
+- Run local development server (`npm run dev`)
+- Verify navigation functions perfectly via sidebar
+- Validate visual aesthetic fits "premium orange" constraints
+- Check mock API functionality in the console/network simulations

@@ -1,0 +1,41 @@
+# House Ops Proto 1 - Resumo da Implementacão
+
+O projeto `house-ops-proto1` foi estruturado com sucesso utilizando **Vite, React e TypeScript**, seguindo a paleta de cores laranja com um visual moderno.
+
+## Funcionalidades Implementadas
+
+### Estrutura Base
+- Criação do projeto limpo.
+- Layout contendo um **Menu Lateral Esquerdo** com navegação principal para as rotas da aplicação (Dashboard, Produtos, Supermercado e Tarefas Diárias).
+- Identidade visual em tons de **laranja** aplicada no CSS global (utilizando CSS puro com variáveis customizadas para facilitar manutenção).
+
+### Integração (Mock API)
+- Criada a camada de serviço [api.ts](file:///Users/zucolotto/zclt/gravity-playground/house-ops-proto1/src/services/api.ts). Esta camada exporta métodos assíncronos (`Promise` e `setTimeout`) para simular a latência de uma API real.
+- Todos os módulos da aplicação consomem dados e enviam mutações através desta API.
+
+### Módulos (Visual e Funcional)
+
+1. **Dashboard**
+   - Página inicial que agrega as informações do sistema.
+   - Mostra o total de produtos cadastrados, quantos itens faltam comprar no supermercado e quantas tarefas estão pendentes para o dia.
+
+2. **Cadastro de Produtos (/produtos)**
+   - Formulário para registrar novos itens de casa (Nome, Categoria e Estoque).
+   - Lista interativa visualizando todos os produtos retornados pela API mock.
+
+3. **Lista de Supermercado (/supermercado)**
+   - Formulário simples e direto para adicionar algo na lista.
+   - Checkboxes customizadas permitindo marcar o item como "comprado", o que envia uma alteração de status para a API e atualiza a interface dinamicamente com riscado visual e redução de opacidade.
+
+4. **Tarefas Diárias (/tarefas)**
+   - Um acompanhamento do que precisa ser feito no dia (estilo ToDo).
+   - Marcar a tarefa como concluída a envia para a API, cruzando o texto dinamicamente.
+
+## Como testar
+
+O servidor local de desenvolvimento já está rodando! 
+Para ver seu aplicativo funcionando:
+1. Abra seu navegador em `http://localhost:5173/`
+
+### Testes Adicionais
+O comando `npm run build` foi executado e a aplicação de produção **compila com sucesso e sem erros de TypeScript**, garantindo tipagens robustas para a evolução do sistema.

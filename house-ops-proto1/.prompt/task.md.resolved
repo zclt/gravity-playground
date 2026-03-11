@@ -1,0 +1,12 @@
+# House Ops Proto 1 - Project Plan
+
+- [x] Initialize Vite + React + TS project named `house-ops-proto1`
+- [x] Install custom dependencies (`react-router-dom`, `lucide-react` for icons)
+- [x] Configure global styling and CSS variables (orange theme)
+- [x] Create layout component with left sidebar navigation
+- [x] Implement mock API service layer
+- [x] Create Dashboard page
+- [x] Create Product Registration page (Cadastro de Produtos)
+- [x] Create Supermarket List page (Cadastro de Lista de Supermercado)
+- [x] Create Daily Tasks page (Cadastro de Tarefas Diárias - estilo ToDo)
+- [x] Wire up routing in main App component
