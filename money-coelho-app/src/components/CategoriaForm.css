@@ -1,0 +1,105 @@
+.categoria-modal { max-width: 480px; }
+
+.categoria-preview {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+}
+
+.preview-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+
+.preview-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: color var(--transition);
+}
+
+/* Ícones */
+.icones-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+}
+
+.icone-btn {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.icone-btn:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-3);
+  transform: scale(1.1);
+}
+
+.icone-ativo {
+  border-color: var(--primary) !important;
+  background: var(--primary-dim) !important;
+}
+
+/* Cores */
+.cores-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.cor-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+}
+
+.cor-btn:hover {
+  transform: scale(1.15);
+  border-color: rgba(255,255,255,0.4);
+}
+
+.cor-ativa {
+  border-color: #fff !important;
+  box-shadow: 0 0 0 2px var(--primary);
+  transform: scale(1.1);
+}
+
+.cor-custom-input {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  overflow: hidden;
+}
+
+.cor-custom-input::-webkit-color-swatch-wrapper { padding: 0; }
+.cor-custom-input::-webkit-color-swatch { border: none; border-radius: 50%; }
