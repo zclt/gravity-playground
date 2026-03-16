@@ -14,22 +14,55 @@ const fmtData = (d) => {
 };
 
 const FILTROS = ['todos', 'entrada', 'saida'];
+const PERIODOS = ['todos', 'diario', 'semanal', 'mensal'];
+
+const isInPeriod = (dateStr, period) => {
+  if (period === 'todos') return true;
+  const date = new Date(dateStr + 'T12:00:00');
+  const now = new Date();
+  
+  if (period === 'diario') {
+    return date.toDateString() === now.toDateString();
+  }
+  
+  if (period === 'semanal') {
+    // Semana atual (Segunda a Domingo)
+    const currentDay = now.getDay(); // 0 (Dom) a 6 (Sab)
+    const diffToMonday = currentDay === 0 ? -6 : 1 - currentDay;
+    const monday = new Date(now);
+    monday.setDate(now.getDate() + diffToMonday);
+    monday.setHours(0, 0, 0, 0);
+    
+    const sunday = new Date(monday);
+    sunday.setDate(monday.getDate() + 6);
+    sunday.setHours(23, 59, 59, 999);
+    
+    return date >= monday && date <= sunday;
+  }
+  
+  if (period === 'mensal') {
+    return date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
+  }
+  
+  return true;
+};
 
 export default function Lancamentos() {
   const { lancamentos, loading, criar, remover } = useLancamentos();
   const { categorias, criarSeNaoExistir } = useCategorias();
   const [mostrarForm, setMostrarForm] = useState(false);
   const [filtro, setFiltro] = useState('todos');
+  const [filtroPeriodo, setFiltroPeriodo] = useState('todos');
 
   const filtrados = lancamentos.filter(
-    (l) => filtro === 'todos' || l.tipo === filtro
+    (l) => (filtro === 'todos' || l.tipo === filtro) && isInPeriod(l.data, filtroPeriodo)
   );
 
-  const totalEntradas = lancamentos
+  const totalEntradas = filtrados
     .filter((l) => l.tipo === 'entrada')
     .reduce((acc, l) => acc + (l.valor || 0), 0);
 
-  const totalSaidas = lancamentos
+  const totalSaidas = filtrados
     .filter((l) => l.tipo === 'saida')
     .reduce((acc, l) => acc + (l.valor || 0), 0);
 
@@ -72,17 +105,31 @@ export default function Lancamentos() {
 
       {/* Filtros */}
       <div className="card">
-        <div className="filtros-bar">
-          {FILTROS.map((f) => (
-            <button
-              key={f}
-              className={`filtro-btn ${filtro === f ? 'filtro-ativo' : ''}`}
-              onClick={() => setFiltro(f)}
-            >
-              {f === 'todos' ? 'Todos' : f === 'entrada' ? '↑ Entradas' : '↓ Saídas'}
-            </button>
-          ))}
-          <span className="filtros-count">{filtrados.length} registro{filtrados.length !== 1 ? 's' : ''}</span>
+        <div className="filtros-container">
+          <div className="filtros-bar">
+            {FILTROS.map((f) => (
+              <button
+                key={f}
+                className={`filtro-btn ${filtro === f ? 'filtro-ativo' : ''}`}
+                onClick={() => setFiltro(f)}
+              >
+                {f === 'todos' ? 'Todos' : f === 'entrada' ? '↑ Entradas' : '↓ Saídas'}
+              </button>
+            ))}
+          </div>
+          
+          <div className="filtros-bar">
+            {PERIODOS.map((p) => (
+              <button
+                key={p}
+                className={`filtro-btn ${filtroPeriodo === p ? 'filtro-ativo' : ''}`}
+                onClick={() => setFiltroPeriodo(p)}
+              >
+                {p === 'todos' ? 'Qualquer data' : p === 'diario' ? 'Diário' : p === 'semanal' ? 'Semanal' : 'Mensal'}
+              </button>
+            ))}
+            <span className="filtros-count">{filtrados.length} registro{filtrados.length !== 1 ? 's' : ''}</span>
+          </div>
         </div>
 
         {loading ? (
